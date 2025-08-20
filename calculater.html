@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,13 +7,13 @@
   <title>Calculator • Beginner HTML/CSS/JS</title>
   <style>
     :root {
-      --bg: #0f172a;          /* slate-900 */
-      --panel: #111827cc;     /* semi-transparent dark */
-      --accent: #22d3ee;      /* cyan-400 */
-      --accent-2: #a78bfa;    /* violet-400 */
-      --text: #e5e7eb;        /* gray-200 */
-      --muted: #9ca3af;       /* gray-400 */
-      --danger: #f87171;      /* red-400 */
+      --bg: #0f172a;         
+      --panel: #111827cc;     
+      --accent: #22d3ee;
+      --accent-2: #a78bfa;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --danger: #f87171;
       --radius: 20px;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
@@ -149,13 +148,11 @@
     (function() {
       const displayEl = document.getElementById('display');
 
-      let first = null;      // number | null
-      let operator = null;   // '+', '-', '*', '/', '%'
-      let current = '0';     // current input as string
-      let shouldReset = false; // when true, next digit replaces current
-
-      const MAX_LEN = 16; // prevent overly long numbers on display
-
+      let first = null;      
+      let operator = null;
+      let current = '0';     
+      let shouldReset = false;
+      const MAX_LEN = 16; 
       function updateDisplay(text) {
         displayEl.textContent = text ?? current;
       }
@@ -163,7 +160,7 @@
       function toNum(s) { return parseFloat(s); }
       function clampLen(s) {
         if (s.length <= MAX_LEN) return s;
-        // try to format using exponential when too long
+      
         const n = Number(s);
         if (!Number.isFinite(n)) return 'Error';
         return n.toExponential(8).replace(/\+?0*(?=\d)/, '');
@@ -202,7 +199,7 @@
       }
 
       function percent() {
-        // Treat percent as unary on current: current = current / 100
+
         const n = toNum(current);
         current = clampLen(String(round(n / 100)));
         updateDisplay();
@@ -230,7 +227,7 @@
           case '/':
             if (b === 0) { updateDisplay('Cannot divide by 0'); first = null; operator = null; current = '0'; shouldReset = true; return; }
             res = a / b; break;
-          case '%': res = a % b; break; // not exposed as binary in UI but kept for completeness
+          case '%': res = a % b; break;
           default: return;
         }
         res = round(res, 12);
@@ -241,7 +238,7 @@
         shouldReset = true;
       }
 
-      // Click handlers
+
       document.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('click', () => {
           const v = btn.getAttribute('data-val');
@@ -261,7 +258,7 @@
         });
       });
 
-      // Keyboard support
+     
       window.addEventListener('keydown', (e) => {
         const { key } = e;
         if (/^[0-9]$/.test(key)) return inputDigit(key);
@@ -272,11 +269,11 @@
         if (['+', '-', '*', '/'].includes(key)) return setOperator(key);
       });
 
-      // Init
+      
       updateDisplay('0');
     })();
   </script>
 </body>
 </html>
 
->>>>>>> 0b7201c5ebdbb382b2765754c6301a6756ca1ed6
+
